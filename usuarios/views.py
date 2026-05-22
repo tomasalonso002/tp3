@@ -3,7 +3,8 @@ from .forms import UsuarioPersonalizadoForm
 # Create your views here.
 def usuarios(request):
     if request.method == "POST":
-        form = UsuarioPersonalizadoForm(request.POST)
+        print(request.FILES)
+        form = UsuarioPersonalizadoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('usuarios')
