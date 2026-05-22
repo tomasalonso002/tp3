@@ -32,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tailwind', #Estos tres son para los styles
+    'theme',
+    'widget_tweaks', 
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuarios'
 ]
+
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,4 +128,4 @@ STATIC_URL = 'static/'
 
 #Esto es para configurar donde se van a almacenar la imagenes
 MEDIA_URL ='/media/'
-MEDIA_ROOT =os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
