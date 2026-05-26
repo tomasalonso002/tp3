@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'usuarios'
+    'usuarios',
+    'rutina', 
+    'saludo',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -73,6 +75,10 @@ TEMPLATES = [
         },
     },
 ]
+
+
+LOGIN_REDIRECT_URL = 'saludo'
+LOGOUT_REDIRECT_URL = 'saludo'
 
 WSGI_APPLICATION = 'gym.wsgi.application'
 
