@@ -1,0 +1,13 @@
+
+{% extends 'usuarios/base.html' %}
+
+{%block body%}
+
+<h1>Iniciar sesión</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit"> enviar</button>
+</form>
+{%endblock%}
