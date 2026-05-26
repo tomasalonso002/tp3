@@ -8,7 +8,16 @@
     <title>{%block title%} Plennus {%endblock%}</title>
     {% tailwind_css %}
 </head>
-<body class="bg-zinc-900">
+<body class="bg-white">
+    <nav class="bg-amber-200 text-2xl">
+        {% else %}
+        <a href="{% url 'usuarios' %}">usuarios</a>
+        {% if user.is_autenticated %}
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'login' %}">Iniciar Sesion</a>
+        <a href="{% url 'consultas' %}">Consultas</a>
+
+    </nav>
     {% block body %}
     <!--  -->
     {% endblock %}
