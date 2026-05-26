@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'usuarios'
+    'usuarios',
+    'inicio'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'gym.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':[BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +74,9 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_REDIRECT_URL='inicio'
+LOGOUT_REDIRECT_URL ='inicio'
 
 WSGI_APPLICATION = 'gym.wsgi.application'
 
