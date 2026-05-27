@@ -3,4 +3,8 @@
 
 {% block body %}
 <h1 class="">Plennuss Iniciooo</h1>
+{% if user.is_authenticated %}
+    <p>Bienvenido {{ request.user.username }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar sesión</a>
+{% endif %}
 {% endblock %}
