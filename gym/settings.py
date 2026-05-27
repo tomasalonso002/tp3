@@ -43,12 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-<<<<<<< HEAD
-    'rutina', 
-    'saludo',
-=======
-    'inicio'
->>>>>>> 066a61f87ab50d4772704140327fd94e817196d8
+    'inicio',
+    'rutina',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -80,14 +76,9 @@ TEMPLATES = [
     },
 ]
 
-<<<<<<< HEAD
 
-LOGIN_REDIRECT_URL = 'saludo'
-LOGOUT_REDIRECT_URL = 'saludo'
-=======
 LOGIN_REDIRECT_URL='inicio'
 LOGOUT_REDIRECT_URL ='inicio'
->>>>>>> 066a61f87ab50d4772704140327fd94e817196d8
 
 WSGI_APPLICATION = 'gym.wsgi.application'
 

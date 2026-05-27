@@ -10,13 +10,19 @@
 </head>
 <body class="bg-white">
     <nav class="bg-amber-200 text-2xl">
+        {% if user.is_authenticated %}
+            <a href="{% url 'usuarios' %}">usuarios</a>
+            <a href="{% url 'crear_rutina' %}">Crear Rutina</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+                
+            </form>
         {% else %}
-        <a href="{% url 'usuarios' %}">usuarios</a>
-        {% if user.is_autenticated %}
         <a href="{% url 'inicio' %}">Inicio</a>
         <a href="{% url 'login' %}">Iniciar Sesion</a>
         <a href="{% url 'consultas' %}">Consultas</a>
-
+        {% endif %}
     </nav>
     {% block body %}
     <!--  -->

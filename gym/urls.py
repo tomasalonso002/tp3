@@ -19,20 +19,13 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-from usuarios.views import registrarse
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('saludo.urls')),
     path('usuarios/', include('usuarios.urls')),
-<<<<<<< HEAD
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('account/register', registrarse, name='register'),
-=======
     path('', include('inicio.urls')),
-    path('accounts/', include("django.contrib.auth.urls"))
->>>>>>> 066a61f87ab50d4772704140327fd94e817196d8
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('rutina/', include('rutina.urls'))
 ]
 
 if settings.DEBUG:

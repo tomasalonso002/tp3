@@ -4,46 +4,26 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .models import Rutina
 from .forms import RutinaForm
 
-
 # LISTAR RUTINAS
 @login_required
 def rutinas(request):
 
-    rutinas = Rutina.objects.filter(
-        activa=True
-    ).order_by('-id')
+    rutinas = Rutina.objects.filter(activa=True).order_by('-id')
 
-    return render(
-        request,
-        'rutinas/index.html',
-        {'rutinas': rutinas}
-    )
+    return render(request,'rutinas/index.html', {'rutinas': rutinas})
 
 
 # CREAR RUTINA
 @login_required
-@permission_required('rutinas.add_rutina', raise_exception=True)
+#@permission_required('rutinas.add_rutina', raise_exception=True)
 def crear_rutina(request):
 
     if request.method == 'POST':
 
-        form = RutinaForm(
-            request.POST,
-            request.FILES
-        )
+        form = RutinaForm(request.POST)
 
         if form.is_valid():
-
-            rutina = form.save(commit=False)
-
-            # guarda automáticamente el entrenador
-            rutina.entrenador = request.user
-
-            rutina.save()
-
-            # guardar ManyToMany
-            form.save_m2m()
-
+            form.save()
             return redirect('rutinas')
 
     else:
@@ -52,11 +32,11 @@ def crear_rutina(request):
 
     return render(
         request,
-        'rutinas/crear_rutina.html',
+        'rutina/crear_rutina.html',
         {'form': form}
     )
 
-
+'''
 # EDITAR RUTINA
 @login_required
 @permission_required('rutinas.change_rutina', raise_exception=True)
@@ -118,3 +98,5 @@ def eliminar_rutina(request, id):
         'rutinas/eliminar_rutina.html',
         {'rutina': rutina}
     )
+
+'''
