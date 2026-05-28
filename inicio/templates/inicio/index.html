@@ -1,10 +1,114 @@
 {% extends 'usuarios/base.html' %}
 
+{% block title %}
+    Inicio
+{% endblock %}
 
 {% block body %}
-<h1 class="">Plennuss Iniciooo</h1>
-{% if user.is_authenticated %}
-    <p>Bienvenido {{ request.user.username }}</p>
-    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar sesión</a>
-{% endif %}
+
+<div class="flex flex-col items-center justify-center text-center py-20">
+
+    <!-- TITULO -->
+    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-4">
+        Bienvenido a
+        <span class="text-indigo-600">
+            Plennus
+        </span>
+    </h1>
+
+    <!-- SUBTITULO -->
+    <p class="text-lg text-gray-500 max-w-2xl mb-10">
+        Gestioná rutinas, ejercicios y progreso físico
+        desde una plataforma moderna y simple.
+    </p>
+
+    {% if user.is_authenticated %}
+
+        <!-- CARD USUARIO -->
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 w-full max-w-md">
+
+            <div class="flex flex-col items-center">
+
+                <!-- ICONO -->
+                <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-indigo-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5.121 17.804A9 9 0 1118.88 17.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                    </svg>
+
+                </div>
+
+                <!-- TEXTO -->
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                    Hola, {{ request.user.username }}
+                </h2>
+
+                <p class="text-gray-500 mb-6">
+                    Ya podés administrar tus rutinas y entrenamientos.
+                </p>
+
+                <!-- BOTONES -->
+                <div class="flex gap-4">
+
+                    <a
+                        href="{% url 'rutinas' %}"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-xl shadow-md transition"
+                    >
+                        Ver Rutinas
+                    </a>
+
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-xl shadow-md transition"
+                        >
+                            Cerrar Sesión
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <!-- NO LOGUEADO -->
+       <div class="flex gap-4">
+
+    <a
+        href="{% url 'login' %}"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl shadow-lg transition"
+    >
+        Iniciar Sesión
+    </a>
+
+    <a
+        href="{% url 'register' %}"
+        class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg transition"
+    >
+        Registrarse
+    </a>
+
+</div>
+
+    {% endif %}
+
+</div>
+
 {% endblock %}
