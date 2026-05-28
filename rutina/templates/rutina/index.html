@@ -1,0 +1,125 @@
+{% extends 'usuarios/base.html' %}
+
+{% block body %}
+
+<div class="flex justify-between items-center mb-8">
+
+    <h1 class="text-3xl font-bold text-gray-800">
+        Rutinas
+    </h1>
+
+    <a
+        href="{% url 'crear_rutina' %}"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg shadow-md transition"
+    >
+        + Nueva Rutina
+    </a>
+
+</div>
+
+{% if rutinas %}
+
+    <div class="grid gap-6">
+
+        {% for rutina in rutinas %}
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                            {{ rutina.nombre }}
+                        </h2>
+
+                        {% if rutina.descripcion %}
+                            <p class="text-gray-600 mb-4">
+                                {{ rutina.descripcion }}
+                            </p>
+                        {% endif %}
+
+                        <div class="space-y-1 text-sm text-gray-700">
+
+                            <p>
+                                <span class="font-semibold">Series:</span>
+                                {{ rutina.series }}
+                            </p>
+
+                            <p>
+                                <span class="font-semibold">Repeticiones:</span>
+                                {{ rutina.repeticiones }}
+                            </p>
+
+                            <p>
+                                <span class="font-semibold">Descanso:</span>
+                                {{ rutina.tiempo_descanso }} segundos
+                            </p>
+
+                            <p>
+                                <span class="font-semibold">Nivel:</span>
+                                {{ rutina.get_nivel_display }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% if rutina.imagen %}
+                        <img
+                            src="{{ rutina.imagen.url }}"
+                            alt="{{ rutina.nombre }}"
+                            class="w-32 h-32 object-cover rounded-xl border-2 border-gray-300"
+                        >
+                    {% endif %}
+
+                </div>
+
+                <div class="mt-6 flex gap-3">
+
+                    <a
+                        href="{% url 'editar_rutina' rutina.id %}"
+                        class=" bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-lg shadow transition"
+                    >
+                        Editar
+                    </a>
+
+                    <a
+                        href="{% url 'eliminar_rutina' rutina.id %}"
+                        class="hover:bg-red-600 bg-red-500 hover:bg-red-600 text-black px-4 py-2 rounded-lg shadow transition"
+                    >
+                        Eliminar
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <div class="bg-white p-10 rounded-2xl shadow text-center">
+
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+            No hay rutinas cargadas
+        </h2>
+
+        <p class="text-gray-500 mb-6">
+            Empezá creando tu primera rutina.
+        </p>
+
+        <a
+            href="{% url 'crear_rutina' %}"
+            class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg shadow-md transition"
+        >
+            Crear Rutina
+        </a>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
