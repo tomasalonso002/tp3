@@ -1,10 +1,28 @@
 {% extends 'usuarios/base.html' %}
-{%block body%}
+{% load widget_tweaks %}
 
-<h1>Crear Rutina</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <button type="submit"> enviar</button>
-        </form>
+{%block body%}
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-2xl shadow">
+    <p class="text-2xl font-bold mb-6">Crear Rutina</p>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                <label class="block mb-2 font-semibold text-amber-900">
+                    {{field.label}}
+                </label>
+                
+                <p class="bg-amber-500">{{field | add_class:"border-1 p-2 rounded"}}</p>
+
+            </div>
+        {% endfor %}
+        
+        <button 
+        type="submit"
+        style="cursor:pointer"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"> 
+        Cargar</button>
+    </form>
+</div>
     {%endblock%}

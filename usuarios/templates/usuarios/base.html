@@ -11,11 +11,16 @@
 <body class="bg-white">
     <nav class="bg-amber-200 text-2xl">
         {% if user.is_authenticated %}
-            <a href="{% url 'usuarios' %}">usuarios</a>
+            <a href="{% url 'usuarios' %}">Usuarios</a>
+            <a href="{% url 'nuevo_usuario' %}">Crear Usuario</a>
             <a href="{% url 'crear_rutina' %}">Crear Rutina</a>
+            
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit">Logout</button>
+                <button
+                type="submit"
+                style="cursor: pointer;"
+                >Logout</button>
                 
             </form>
         {% else %}
