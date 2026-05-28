@@ -2,7 +2,7 @@
 {% load widget_tweaks %} <!--Se usa para poder aplicar style a los objetos-->
 
 {% block body %}
-<h1 cla>USUARIOS</h1>
+<h1 >USUARIOS</h1>
 <table class="border-collapse border border-black mx-auto mt-10 p-6">
     <thead>
         <tr>
@@ -32,10 +32,13 @@
                     Sin foto
                 {% endif %}
             </td>
-            <td class="border border-black p-2">
+            <td class="p-5 flex border">
                 <button style="cursor: pointer;" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Editar</button>
-                <button style="cursor: pointer;" class="bg-red-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Borrar</button>
-            
+                <form action="{% url 'borrar_usuario' usuario.id %}" method="post">
+                        {% csrf_token %}
+                        <button  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded cursor-pointer">Borrar</button>
+                </form>
+            </td>
         </tr>
     </tbody>
     {% endfor %}

@@ -1,11 +1,17 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from .forms import ConsultasForm
+from .models import Consultas
 
 # Create your views here.
 def inicio(request):
     return render(request, "inicio/index.html")
 
-def consultas(request):
+def get_consultas(request):
+    consultas = Consultas.objects.filter(is_active=True).order_by("-id")
+    return render(request,'inicio/get_consultas.html',{"consultas":consultas})
+
+
+def nueva_consulta(request):
     if request.method == "POST":
         form = ConsultasForm(request.POST)
         if form.is_valid():
@@ -14,4 +20,12 @@ def consultas(request):
             redirect("inicio")
     else:
         form = ConsultasForm()
-    return render(request, "inicio/consultas.html", {"form":form})
+    return render(request, "inicio/nueva_consulta.html", {"form":form})
+
+def borrar_consulta(request,id):
+    consulta = get_object_or_404(Consultas, id = id)
+    if request.method =="POST":
+        consulta.is_active = False
+        consulta.save()
+        return redirect('get_consultas')
+    return render(request,'inicio/get_consultas.html')
