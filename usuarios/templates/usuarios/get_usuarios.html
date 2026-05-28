@@ -1,0 +1,49 @@
+{% extends 'usuarios/base.html' %}
+{% load widget_tweaks %} <!--Se usa para poder aplicar style a los objetos-->
+
+{% block body %}
+<h1 >USUARIOS</h1>
+<table class="border-collapse border border-black mx-auto mt-10 p-6">
+    <thead>
+        <tr>
+            <th class="border border-black p-2">Username</th>
+            <th class="border border-black p-2">Nombre</th>
+            <th class="border border-black p-2">Apellido</th>
+            <th class="border border-black p-2">DNI</th>
+            <th class="border border-black p-2">Email</th>
+            <th class="border border-black p-2">Telefono</th>
+            <th class="border border-black p-2">Foto</th>
+            <th class="border border-black p-2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td  class="border border-black p-2">{{usuario.username}}</td>
+            <td  class="border border-black p-2">{{usuario.first_name}}</td>
+            <td  class="border border-black p-2">{{usuario.last_name}}</td>
+            <td  class="border border-black p-2">{{usuario.dni}}</td>
+            <td  class="border border-black p-2">{{usuario.email}}</td>
+            <td  class="border border-black p-2">{{usuario.telefono}}</td>
+            <td  class="border border-black p-2">
+                {% if usuario.foto_perfil %}
+                    <img src="{{usuario.foto_perfil.url}}" alt="imagen {{usuario.foto_perfil}}" width="100px">
+                {%else%}
+                    Sin foto
+                {% endif %}
+            </td>
+            <td class="p-5 flex border">
+                <button style="cursor: pointer;" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Editar</button>
+                <form action="{% url 'borrar_usuario' usuario.id %}" method="post">
+                        {% csrf_token %}
+                        <button  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded cursor-pointer">Borrar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+
+    <p>{{usuario.username}}</p>
+{% endblock %}

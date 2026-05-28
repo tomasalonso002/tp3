@@ -24,7 +24,7 @@ def crear_rutina(request):
 
         if form.is_valid():
             form.save()
-            return redirect('rutinas')
+            return redirect('inicio')
 
     else:
 

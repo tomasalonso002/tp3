@@ -1,13 +1,31 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .forms import UsuarioPersonalizadoForm
+from .models import UsuarioPersonalizado
 # Create your views here.
-def nuevo_usuarios(request):
+
+@login_required
+def nuevo_usuario(request):
     if request.method == "POST":
         print(request.FILES)
         form = UsuarioPersonalizadoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('usuarios')
+            return redirect('get_usuarios')
     else:
         form= UsuarioPersonalizadoForm()
-    return render(request,'usuarios/usuarios.html',{'form':form})
+    return render(request,'usuarios/nuevo_usuario.html',{'form':form})
+
+@login_required
+def get_usuarios(request):
+    usuarios = UsuarioPersonalizado.objects.filter(is_active = True).order_by("-id")
+    return render(request, 'usuarios/get_usuarios.html',{'usuarios':usuarios})
+
+def borrar_usuario(request, id):
+    usuario = get_object_or_404(UsuarioPersonalizado, id = id)
+    if request.method =="POST":
+        usuario.is_active = False
+        usuario.save()
+        return redirect('get_usuarios')
+    return render(request, 'usuarios/get_usuarios.html')
+

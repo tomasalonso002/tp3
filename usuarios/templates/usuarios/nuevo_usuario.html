@@ -6,7 +6,7 @@
 <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-2xl shadow">
 
     <h1 class="text-2xl font-bold mb-6">
-        Cargar Uuario
+        Cargar Usuario
     </h1>
 
     <form method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -15,7 +15,13 @@
         {% for field in form %}
             <div>
                 <label class="block mb-2 font-semibold text-amber-900">
-                    {{ field.label }}
+                    {% if field.label == 'First name'%}
+                        <p>Nombre</p>
+                    {% elif field.label == 'Last name'%}
+                        <p>Apellido</p>
+                    {%else%}
+                        {{ field.label }}
+                    {% endif %}
                 </label>
                 <div>
                     {{ field | add_class:"border-1 p-2 rounded" }}

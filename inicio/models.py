@@ -9,5 +9,6 @@ class Consultas(models.Model):
     contenido = models.TextField(max_length=400)
     gmail = models.EmailField(max_length=30)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True, null=True)
     def __str__(self):
         return f"{self.nombre} - {self.titulo_contenido}"
