@@ -33,6 +33,7 @@
     </style>
 
 </head>
+<<<<<<< HEAD
 
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col">
 
@@ -122,6 +123,30 @@
 
         </div>
 
+=======
+<body class="bg-white">
+    <nav class="bg-amber-200 text-2xl">
+        {% if user.is_authenticated %}
+            <a href="{% url 'get_usuarios' %}">Usuarios</a>
+            <a href="{% url 'nuevo_usuario' %}">Crear Usuario</a>
+            <a href="{% url 'crear_rutina' %}">Crear Rutina</a>
+            <a href="{% url 'get_consultas' %}">Consultas</a>
+            
+            
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button
+                type="submit"
+                style="cursor: pointer;"
+                >Logout</button>
+                
+            </form>
+        {% else %}
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'login' %}">Iniciar Sesion</a>
+        <a href="{% url 'nueva_consulta' %}">Consultas</a>
+        {% endif %}
+>>>>>>> main
     </nav>
 
     <!-- CONTENIDO -->

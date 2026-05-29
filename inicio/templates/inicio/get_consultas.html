@@ -1,0 +1,38 @@
+{% extends 'usuarios/base.html' %}
+{% load widget_tweaks %} <!--Se usa para poder aplicar style a los objetos-->
+
+{% block body %}
+<div class="flex flex-col items-center pt-3">
+    <h1 class="text-3xl text-green-900 ">Consultas</h1>
+    <table class="border-collapse border border-black mx-auto mt-10 p-6">
+        <thead>
+            <tr>
+                <th class="border border-black p-2">Nombre</th>
+                <th class="border border-black p-2">Titulo del Contenido</th>
+                <th class="border border-black p-2">Contenido</th>
+                <th class="border border-black p-2">Email</th>
+                <th class="border border-black p-2">Telefono</th>
+                <th class="border border-black p-2">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consulta in consultas %}
+            <tr>
+                <td  class="border border-black p-2">{{consulta.nombre}}</td>
+                <td  class="border border-black p-2">{{consulta.titulo_contenido}}</td>
+                <td  class="border border-black p-2">{{consulta.contenido}}</td>
+                <td  class="border border-black p-2">{{consulta.gmail}}</td>
+                <td  class="border border-black p-2">{{consulta.telefono}}</td>
+                <td class="border border-black p-2">
+                    <form action="{% url 'borrar_consulta' consulta.id %}" method="post">
+                        {% csrf_token %}
+                        <button  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded cursor-pointer">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+    
+{% endblock %}

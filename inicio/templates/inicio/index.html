@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 
 <div class="flex flex-col items-center justify-center text-center py-20">
 
@@ -111,4 +112,11 @@
 
 </div>
 
+=======
+{% if user.is_authenticated %}
+    <p>Bienvenido {{ request.user.username }}</p>
+{% else %}
+    <h1 class="">Plennuss Iniciooo</h1>
+{% endif %}
+>>>>>>> main
 {% endblock %}

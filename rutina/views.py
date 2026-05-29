@@ -6,24 +6,54 @@ from .forms import RutinaForm
 # LISTAR RUTINAS
 @login_required
 def rutinas(request):
+<<<<<<< HEAD
     rutinas = Rutina.objects.filter(activa=True).order_by('-id')
     return render(request, 'rutina/index.html', {'rutinas': rutinas})
+=======
+
+    rutinas = Rutina.objects.filter(activa=True).order_by('-id')
+
+    return render(request,'rutinas/index.html', {'rutinas': rutinas})
+>>>>>>> main
 
 
 # CREAR RUTINA
 @login_required
+<<<<<<< HEAD
+=======
+#@permission_required('rutinas.add_rutina', raise_exception=True)
+>>>>>>> main
 def crear_rutina(request):
     if request.method == 'POST':
+<<<<<<< HEAD
         form = RutinaForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('rutinas') # Redirige al listado
+=======
+
+        form = RutinaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('inicio')
+
+>>>>>>> main
     else:
         form = RutinaForm()
+<<<<<<< HEAD
     
     return render(request, 'rutina/crear_rutina.html', {'form': form})
+=======
 
+    return render(
+        request,
+        'rutina/crear_rutina.html',
+        {'form': form}
+    )
+>>>>>>> main
 
+'''
 # EDITAR RUTINA
 @login_required
 def editar_rutina(request, id):
@@ -50,5 +80,15 @@ def eliminar_rutina(request, id):
         rutina.save()
         return redirect('rutinas')
 
+<<<<<<< HEAD
     return render(request,'rutina/eliminar_rutina.html',{'rutina': rutina})
 
+=======
+    return render(
+        request,
+        'rutinas/eliminar_rutina.html',
+        {'rutina': rutina}
+    )
+
+'''
+>>>>>>> main
