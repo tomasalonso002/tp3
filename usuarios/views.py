@@ -8,7 +8,8 @@ from .forms import UsuarioPersonalizadoForm, UsuarioRegistroForm, EditarUsuarioP
 # Create your views here.
 
 @login_required
-@permission_required('usuarios.add_usuarios')
+
+@permission_required('usuarios.add_usuariopersonalizado')
 def nuevo_usuario(request):
     roles = Group.objects.all()
     if request.method == "POST":
@@ -44,7 +45,7 @@ def register(request):
 
 
 @login_required
-@permission_required('usuarios.view_usuarios')
+@permission_required('usuarios.view_usuariopersonalizado')
 def get_usuarios(request):
     usuarios = UsuarioPersonalizado.objects.filter(is_active=True).order_by("-id")
     return render(request, 'usuarios/get_usuarios.html', {'usuarios': usuarios})
@@ -62,7 +63,6 @@ def borrar_usuario(request, id):
 
 
 @login_required
-@permission_required('usuarios.change_usuario')
 def editar_usuario(request, id):
     usuario = get_object_or_404(UsuarioPersonalizado, id=id)
     if request.method == 'POST':
