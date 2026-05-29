@@ -3,14 +3,12 @@ from .models import UsuarioPersonalizado
 from django.contrib.auth.forms import UserCreationForm
 
 
-# 1. Formulario de creación (Campos unificados de Maxi y Tomás)
 class UsuarioPersonalizadoForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = UsuarioPersonalizado
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'telefono', 'dni', 'email', 'foto_perfil')
 
 
-# 2. Tu formulario de registro público (Maxi)
 class UsuarioRegistroForm(UserCreationForm):
     class Meta:
         model = UsuarioPersonalizado
@@ -24,7 +22,6 @@ class UsuarioRegistroForm(UserCreationForm):
         ]
 
 
-# 3. Formulario de edición (Tomás)
 class EditarUsuarioPersonalizadoForm(forms.ModelForm):
     class Meta:
         model = UsuarioPersonalizado

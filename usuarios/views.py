@@ -7,7 +7,6 @@ from .forms import UsuarioPersonalizadoForm, UsuarioRegistroForm, EditarUsuarioP
 
 # Create your views here.
 
-# 1. Vista de creación (Versión de Tomás, consistente con las nuevas URLs)
 @login_required
 def nuevo_usuario(request):
     roles = Group.objects.all()
@@ -26,7 +25,6 @@ def nuevo_usuario(request):
     return render(request, 'usuarios/nuevo_usuario.html', contexto)
 
 
-# 2. Tu vista de Registro Público (Maxi)
 def register(request):
     if request.method == 'POST':
         form = UsuarioRegistroForm(request.POST, request.FILES)
@@ -44,7 +42,6 @@ def register(request):
     )
 
 
-# 3. Vistas de Gestión de Tomás (Listar, Borrar, Editar)
 @login_required
 def get_usuarios(request):
     usuarios = UsuarioPersonalizado.objects.filter(is_active=True).order_by("-id")
