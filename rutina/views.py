@@ -3,58 +3,28 @@ from django.contrib.auth.decorators import login_required
 from .models import Rutina
 from .forms import RutinaForm
 
-# LISTAR RUTINAS
+# 1. LISTAR RUTINAS
 @login_required
 def rutinas(request):
-<<<<<<< HEAD
     rutinas = Rutina.objects.filter(activa=True).order_by('-id')
     return render(request, 'rutina/index.html', {'rutinas': rutinas})
-=======
-
-    rutinas = Rutina.objects.filter(activa=True).order_by('-id')
-
-    return render(request,'rutinas/index.html', {'rutinas': rutinas})
->>>>>>> main
 
 
-# CREAR RUTINA
+# 2. CREAR RUTINA
 @login_required
-<<<<<<< HEAD
-=======
-#@permission_required('rutinas.add_rutina', raise_exception=True)
->>>>>>> main
 def crear_rutina(request):
     if request.method == 'POST':
-<<<<<<< HEAD
         form = RutinaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('rutinas') # Redirige al listado
-=======
-
-        form = RutinaForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
-
->>>>>>> main
+            return redirect('rutinas')  # Redirige al listado de rutinas
     else:
         form = RutinaForm()
-<<<<<<< HEAD
     
     return render(request, 'rutina/crear_rutina.html', {'form': form})
-=======
 
-    return render(
-        request,
-        'rutina/crear_rutina.html',
-        {'form': form}
-    )
->>>>>>> main
 
-'''
-# EDITAR RUTINA
+# 3. EDITAR RUTINA (Rescatado de los comentarios)
 @login_required
 def editar_rutina(request, id):
     rutina = get_object_or_404(Rutina, id=id)
@@ -69,26 +39,14 @@ def editar_rutina(request, id):
 
     return render(request, 'rutina/editar_rutina.html', {'form': form, 'rutina': rutina})
 
-# ELIMINAR RUTINA (borrado lógico)
-@login_required
-#@permission_required('rutinas.delete_rutina', raise_exception=True)
-def eliminar_rutina(request, id):
 
+# 4. ELIMINAR RUTINA (Borrado lógico - Rescatado de los comentarios)
+@login_required
+def eliminar_rutina(request, id):
     rutina = get_object_or_404(Rutina, id=id)
     if request.method == 'POST':
         rutina.activa = False
         rutina.save()
         return redirect('rutinas')
 
-<<<<<<< HEAD
-    return render(request,'rutina/eliminar_rutina.html',{'rutina': rutina})
-
-=======
-    return render(
-        request,
-        'rutinas/eliminar_rutina.html',
-        {'rutina': rutina}
-    )
-
-'''
->>>>>>> main
+    return render(request, 'rutina/eliminar_rutina.html', {'rutina': rutina})
