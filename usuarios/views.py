@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login
 from django.contrib.auth.models import Group
 from .models import UsuarioPersonalizado
@@ -8,6 +8,7 @@ from .forms import UsuarioPersonalizadoForm, UsuarioRegistroForm, EditarUsuarioP
 # Create your views here.
 
 @login_required
+@permission_required('usuarios.add_usuarios')
 def nuevo_usuario(request):
     roles = Group.objects.all()
     if request.method == "POST":
@@ -43,12 +44,14 @@ def register(request):
 
 
 @login_required
+@permission_required('usuarios.view_usuarios')
 def get_usuarios(request):
     usuarios = UsuarioPersonalizado.objects.filter(is_active=True).order_by("-id")
     return render(request, 'usuarios/get_usuarios.html', {'usuarios': usuarios})
 
 
 @login_required
+@permission_required('usuarios.delete_usuario')
 def borrar_usuario(request, id):
     usuario = get_object_or_404(UsuarioPersonalizado, id=id)
     if request.method == "POST":
@@ -59,6 +62,7 @@ def borrar_usuario(request, id):
 
 
 @login_required
+@permission_required('usuarios.change_usuario')
 def editar_usuario(request, id):
     usuario = get_object_or_404(UsuarioPersonalizado, id=id)
     if request.method == 'POST':

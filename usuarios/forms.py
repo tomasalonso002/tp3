@@ -25,4 +25,4 @@ class UsuarioRegistroForm(UserCreationForm):
 class EditarUsuarioPersonalizadoForm(forms.ModelForm):
     class Meta:
         model = UsuarioPersonalizado
-        fields = ['username', 'first_name', 'last_name', 'telefono', 'email', 'foto_perfil']
+        fields = ['username', 'first_name', 'last_name', 'telefono', 'email', 'foto_perfil','rol_usuario']
